@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Covid Location</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+
+    <style>
+        #maplocation {
+            height: 700px;
+            width: 700px;
+        }
+    </style>
 </head>
 <body>
+
+<div id="maplocation"></div>
+
+<script>
+    var map = L.map('maplocation').setView([52.40, 16.92], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([52.40, 16.92]).addTo(map)
+        .bindPopup('Poznan COVID-19');
+</script>
 
 </body>
 </html>
