@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Covid Location</title>
@@ -14,8 +14,11 @@
 
     <style>
         #maplocation {
-            height: 700px;
-            width: 700px;
+            height: 800px;
+        }
+        body {
+            margin: 0px;
+            padding: 0px;
         }
     </style>
 </head>
@@ -23,16 +26,22 @@
 
 <div id="maplocation"></div>
 
-<script>
-    var map = L.map('maplocation').setView([52.40, 16.92], 13);
+<script th:inline="javascript">
+    var spots = [[${spots}]];
+    var map = L.map('maplocation').setView([52.06, 19.48], 6);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    L.marker([52.40, 16.92]).addTo(map)
-        .bindPopup('Poznan COVID-19');
-</script>
+    spots.forEach(point => {
+        L.marker([point.latitude,point.longitude]).addTo(map)
+            .bindPopup(point.region,point.name);
+    })
 
+    // L.marker([spots.latitude, spots.longitude]).addTo(map)
+    //     .bindPopup(spots.name);
+
+</script>
 </body>
 </html>
