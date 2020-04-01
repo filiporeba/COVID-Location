@@ -13,12 +13,15 @@
             crossorigin=""></script>
 
     <style>
-        #maplocation {
-            height: 800px;
-        }
-        body {
+        html, body {
+            height: 100%;
             margin: 0px;
-            padding: 0px;
+        }
+        #maplocation {
+            min-height: 100%;
+        }
+        #name {
+            text-align: center;
         }
     </style>
 </head>
@@ -31,16 +34,14 @@
     var map = L.map('maplocation').setView([52.06, 19.48], 6);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     spots.forEach(point => {
         L.marker([point.latitude,point.longitude]).addTo(map)
-            .bindPopup(point.region,point.name);
+            .bindPopup("<b>" + point.region + "</b><br><div id='name'>" +point.name+"<div>");
     })
 
-    // L.marker([spots.latitude, spots.longitude]).addTo(map)
-    //     .bindPopup(spots.name);
 
 </script>
 </body>
